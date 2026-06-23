@@ -87,3 +87,29 @@ footer {
     color: #94a3b8;
     margin-top: 40px;
 }
+
+/* ===================== */
+/* Démonstration Box Model */
+/* ===================== */
+
+/* Classe .box — illustre les propriétés du modèle de boîte :
+   border, padding, margin, background-color, border-radius */
+.box {
+    border: 3px solid #38bdf8;
+    padding: 20px;
+    margin: 30px 0;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+
+    font-size: 18px;
+    line-height: 1.6;
+
+    transition: all 0.3s ease;
+}
+
+/* Effet hover — ajoute une ombre, un décalage et un changement de fond */
+.box:hover {
+    background-color: rgba(56, 189, 248, 0.2);
+    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+    transform: translateY(-3px);
+}
