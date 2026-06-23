@@ -113,3 +113,116 @@ footer {
     box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
     transform: translateY(-3px);
 }
+
+/* ===================== */
+/* Section Équipe */
+/* ===================== */
+
+/* Conteneur principal de la section Équipe */
+.team-section {
+    margin: 40px 0;
+}
+
+/* Grid layout pour la grille des membres */
+.team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .founder-card {
+        grid-column: span 3;
+    }
+}
+
+/* Cartes des membres (Fondateur & Coming soon) */
+.team-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.team-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #38bdf8;
+    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+    transform: translateY(-5px);
+}
+
+/* Carte du fondateur spécifique */
+.founder-card {
+    background: rgba(56, 189, 248, 0.05);
+    border: 1.5px solid rgba(56, 189, 248, 0.2);
+}
+
+.founder-card .role {
+    color: #38bdf8;
+    font-weight: 600;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.founder-card .bio {
+    line-height: 1.6;
+    color: #e2e8f0;
+}
+
+.founder-card .vision-quote {
+    border-left: 4px solid #facc15;
+    padding-left: 15px;
+    font-style: italic;
+    color: #cbd5e1;
+    margin: 20px 0 0 0;
+}
+
+/* Galerie photos du fondateur */
+.founder-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.founder-gallery img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.founder-gallery img:hover {
+    transform: scale(1.03);
+    border-color: #38bdf8;
+}
+
+/* Style spécifique pour les cartes "Coming Soon" */
+.coming-soon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, 0.2);
+    min-height: 180px;
+}
+
+.coming-soon h3 {
+    margin-bottom: 10px;
+    color: #94a3b8;
+}
+
+.coming-soon p {
+    color: #64748b;
+    font-style: italic;
+    font-weight: 300;
+}
