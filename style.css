@@ -303,24 +303,6 @@ blockquote {
     box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
     color: var(--text-primary);
 }
-
-/* Section Partager le Projet */
-.share-section {
-    text-align: center;
-    border: 1px solid rgba(124, 58, 237, 0.15);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(124, 58, 237, 0.02));
-}
-
-.share-button {
-    margin: 15px 0;
-}
-
-.share-note {
-    font-size: 14px;
-    color: var(--text-secondary);
-    margin-top: 15px;
-}
-
 /* Footer */
 footer {
     text-align: center;
