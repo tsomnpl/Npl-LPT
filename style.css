@@ -303,6 +303,53 @@ blockquote {
     box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
     color: var(--text-primary);
 }
+/* ===================== */
+/* Section Services       */
+/* Démonstration Flexbox  */
+/* ===================== */
+
+/* Conteneur Flexbox des cartes de services */
+.services-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+/* Style commun des cartes de services */
+/* (complète le style .card déjà défini) */
+.services-container .card {
+    flex: 1;
+    min-width: 260px;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
+    transition: all .3s ease;
+    margin-bottom: 0;
+}
+
+/* Survol des cartes */
+.services-container .card:hover {
+    transform: translateY(-5px);
+}
+
+/* Carte 1 : Développement Web — bordure bleue */
+.service-web {
+    border-left: 6px solid #38BDF8;
+}
+
+/* Carte 2 : UI / UX Design — bordure violette */
+.service-ui {
+    border-left: 6px solid #7C3AED;
+}
+
+/* Carte 3 : Intelligence Artificielle — bordure verte */
+.service-ai {
+    border-left: 6px solid #22C55E;
+}
+
 /* Footer */
 footer {
     text-align: center;
@@ -360,5 +407,10 @@ footer p {
 
     .founder-gallery img {
         width: 100%;
+    }
+
+    /* BONUS — Cartes services empilées verticalement sur mobile */
+    .services-container {
+        flex-direction: column;
     }
 }
