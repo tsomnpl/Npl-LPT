@@ -13,6 +13,9 @@
 
     <!-- Liaison du fichier CSS externe -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Import Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
@@ -26,6 +29,39 @@
             <a href="contact.html">Contact</a>
         </nav>
     </header>
+
+    <hr>
+
+    <!-- Hero Section -->
+    <section class="flex items-center justify-between flex-col lg:flex-row gap-10 py-20 px-8">
+
+        <!-- Texte principal -->
+        <div class="flex-1">
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight transition duration-300 hover:scale-105">
+                Construisons le futur du numérique avec Future-Tech
+            </h1>
+
+            <p class="text-lg text-gray-600 mt-6 max-w-xl">
+                Future-Tech accompagne les entreprises, les startups et les entrepreneurs dans la création de solutions numériques modernes grâce au développement web, au design UI/UX et à l'innovation technologique.
+            </p>
+
+            <!-- Bouton d'appel à l'action -->
+            <a
+                href="contact.html"
+                class="inline-block mt-8 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition duration-300 hover:scale-105">
+                Nous contacter
+            </a>
+        </div>
+
+        <!-- Illustration -->
+        <div class="flex-1 flex justify-center">
+            <img
+                src="land.jpg"
+                alt="Illustration Future-Tech"
+                class="w-full max-w-md mx-auto">
+        </div>
+
+    </section>
 
     <hr>
 
