@@ -1,18 +1,18 @@
 /* Variables */
 :root {
-    --white: #FFFFFF;
+    --white: #F4F8FF;
     --blue-600: #2563EB;
     --blue-400: #60A5FA;
-    --blue-50: #EFF6FF;
-    --slate-50: #F8FAFC;
+    --blue-50: #E7F0FF;
+    --slate-50: #EEF2F8;
     --slate-200: #E2E8F0;
     --slate-600: #475569;
     --slate-800: #1E293B;
     --slate-900: #0F172A;
     --font-family: 'Poppins', sans-serif;
     --transition-default: all 0.3s ease;
-    --glass-bg: rgba(255, 255, 255, 0.55);
-    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-bg: rgba(244, 248, 255, 0.72);
+    --glass-border: rgba(203, 213, 225, 0.55);
     --glass-shadow: 0 10px 35px rgba(37, 99, 235, 0.12);
 }
 
