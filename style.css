@@ -237,6 +237,7 @@ main > section:hover {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: var(--glass-shadow);
+    padding: 30px;
     transition: var(--transition-default);
 }
 
@@ -447,6 +448,18 @@ blockquote {
     background: rgba(255, 255, 255, 0.72);
 }
 
+/* Contact layout */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.contact-card {
+    margin: 0;
+}
+
 /* Survol des cartes */
 .services-container .card:hover {
     transform: translateY(-6px);
@@ -547,6 +560,10 @@ footer p {
     .hero-actions {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
     }
 
     /* Cartes services empilées verticalement sur mobile */
