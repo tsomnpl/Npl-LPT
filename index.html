@@ -254,6 +254,87 @@
 
         </section>
 
+        <!-- ===================== -->
+        <!-- Section FAQ -->
+        <!-- ===================== -->
+        <section class="py-16 px-4 bg-blue-50/70 border border-white/70 backdrop-blur-xl rounded-3xl my-8 shadow-lg shadow-blue-100/70">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-center text-3xl font-bold mb-4 text-slate-900 border-none">
+                    Questions fréquentes
+                </h2>
+                <p class="text-center text-slate-600 max-w-3xl mx-auto mb-10">
+                    Vous avez des questions sur Future-Tech ? Retrouvez ici les réponses aux interrogations les plus fréquentes concernant nos services, notre méthode de travail et notre accompagnement.
+                </p>
+
+                <div class="space-y-4">
+                    <!-- Question 1 -->
+                    <div class="bg-white/80 backdrop-blur-lg rounded-xl shadow-md border border-blue-100 px-6">
+                        <button class="faq-toggle w-full flex items-center justify-between py-4 cursor-pointer border-b border-blue-100 text-left">
+                            <span class="font-semibold text-slate-900">Quels services propose Future-Tech ?</span>
+                            <span class="faq-icon text-blue-600 text-2xl leading-none">+</span>
+                        </button>
+                        <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
+                            <p class="text-slate-600 pb-4">
+                                Future-Tech accompagne les entreprises, startups et entrepreneurs dans la création de sites web modernes, d'interfaces UI/UX et de solutions digitales innovantes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="bg-white/80 backdrop-blur-lg rounded-xl shadow-md border border-blue-100 px-6">
+                        <button class="faq-toggle w-full flex items-center justify-between py-4 cursor-pointer border-b border-blue-100 text-left">
+                            <span class="font-semibold text-slate-900">Travaillez-vous avec les petites entreprises ?</span>
+                            <span class="faq-icon text-blue-600 text-2xl leading-none">+</span>
+                        </button>
+                        <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
+                            <p class="text-slate-600 pb-4">
+                                Oui. Nous collaborons aussi bien avec les indépendants que les PME, startups et grandes entreprises afin de proposer des solutions adaptées à chaque besoin.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="bg-white/80 backdrop-blur-lg rounded-xl shadow-md border border-blue-100 px-6">
+                        <button class="faq-toggle w-full flex items-center justify-between py-4 cursor-pointer border-b border-blue-100 text-left">
+                            <span class="font-semibold text-slate-900">Comment démarre un projet ?</span>
+                            <span class="faq-icon text-blue-600 text-2xl leading-none">+</span>
+                        </button>
+                        <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
+                            <p class="text-slate-600 pb-4">
+                                Chaque projet commence par un échange afin de comprendre vos objectifs, vos besoins et les fonctionnalités attendues avant de proposer une solution adaptée.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="bg-white/80 backdrop-blur-lg rounded-xl shadow-md border border-blue-100 px-6">
+                        <button class="faq-toggle w-full flex items-center justify-between py-4 cursor-pointer border-b border-blue-100 text-left">
+                            <span class="font-semibold text-slate-900">Les sites sont-ils responsives ?</span>
+                            <span class="faq-icon text-blue-600 text-2xl leading-none">+</span>
+                        </button>
+                        <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
+                            <p class="text-slate-600 pb-4">
+                                Oui. Toutes nos réalisations sont optimisées pour les ordinateurs, tablettes et smartphones afin d'offrir une excellente expérience utilisateur.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="bg-white/80 backdrop-blur-lg rounded-xl shadow-md border border-blue-100 px-6">
+                        <button class="faq-toggle w-full flex items-center justify-between py-4 cursor-pointer border-b border-blue-100 text-left">
+                            <span class="font-semibold text-slate-900">Comment contacter Future-Tech ?</span>
+                            <span class="faq-icon text-blue-600 text-2xl leading-none">+</span>
+                        </button>
+                        <div class="faq-answer overflow-hidden max-h-0 transition-all duration-300">
+                            <p class="text-slate-600 pb-4">
+                                Vous pouvez nous contacter directement depuis la page Contact ou par email à l'adresse : isaactchiwanou@gmail.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <hr>
@@ -263,5 +344,24 @@
         <p>&copy; 2026 Future-Tech - Projet fil rouge de développement web.</p>
     </footer>
 
+    <script>
+        // On recupere tous les boutons de question pour piloter l'accordeon FAQ.
+        const faqToggles = document.querySelectorAll(".faq-toggle");
+
+        faqToggles.forEach((toggle) => {
+            toggle.addEventListener("click", () => {
+                // Chaque bouton controle sa reponse associee juste en dessous.
+                const answer = toggle.nextElementSibling;
+                const icon = toggle.querySelector(".faq-icon");
+
+                // Ouvre/ferme la reponse avec classList.toggle() pour animation Tailwind.
+                answer.classList.toggle("max-h-0");
+                answer.classList.toggle("max-h-96");
+
+                // Change l'icone selon l'etat ouvert/ferme.
+                icon.textContent = answer.classList.contains("max-h-96") ? "-" : "+";
+            });
+        });
+    </script>
 </body>
 </html>
