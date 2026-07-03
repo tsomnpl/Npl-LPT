@@ -370,6 +370,133 @@
             </div>
         </section>
 
+        <!-- Section Portfolio -->
+        <section class="py-16 px-4 bg-white border border-slate-200 rounded-3xl my-8 shadow-md">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-center text-3xl font-bold mb-4 text-slate-900 border-none">Nos Réalisations</h2>
+                <p class="text-center text-slate-600 max-w-4xl mx-auto mb-10">
+                    Découvrez quelques exemples de projets illustrant le savoir-faire de Future-Tech dans le développement web, le design d'interfaces, les applications modernes et les solutions basées sur l'intelligence artificielle.
+                </p>
+
+                <!-- Boutons de filtre -->
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+                    <button type="button" class="portfolio-filter-btn px-4 py-2 rounded-lg border border-slate-200 bg-blue-600 text-white text-sm font-medium transition duration-300" data-filter="Tous">Tous</button>
+                    <button type="button" class="portfolio-filter-btn px-4 py-2 rounded-lg border border-slate-200 bg-white text-slate-700 text-sm font-medium transition duration-300 hover:bg-slate-100" data-filter="Développement Web">Développement Web</button>
+                    <button type="button" class="portfolio-filter-btn px-4 py-2 rounded-lg border border-slate-200 bg-white text-slate-700 text-sm font-medium transition duration-300 hover:bg-slate-100" data-filter="UI/UX Design">UI/UX Design</button>
+                    <button type="button" class="portfolio-filter-btn px-4 py-2 rounded-lg border border-slate-200 bg-white text-slate-700 text-sm font-medium transition duration-300 hover:bg-slate-100" data-filter="Applications">Applications</button>
+                    <button type="button" class="portfolio-filter-btn px-4 py-2 rounded-lg border border-slate-200 bg-white text-slate-700 text-sm font-medium transition duration-300 hover:bg-slate-100" data-filter="Intelligence Artificielle">Intelligence Artificielle</button>
+                </div>
+
+                <!-- Galerie -->
+                <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Carte Projet -->
+                    <article
+                        class="portfolio-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer border border-slate-200"
+                        data-category="Développement Web"
+                        data-title="Site Web Corporate"
+                        data-image="../6ccab4506ed385df6378b091ad0553f5.jpg"
+                        data-description="Création d'un site vitrine moderne destiné aux entreprises.">
+                        <img src="../6ccab4506ed385df6378b091ad0553f5.jpg" alt="Site Web Corporate" class="w-full h-52 object-cover">
+                        <div class="p-5">
+                            <p class="text-xs font-semibold text-blue-600 mb-2">Développement Web</p>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Site Web Corporate</h3>
+                            <p class="text-sm text-slate-600">Création d'un site vitrine moderne destiné aux entreprises.</p>
+                        </div>
+                    </article>
+
+                    <!-- Carte Projet -->
+                    <article
+                        class="portfolio-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer border border-slate-200"
+                        data-category="Développement Web"
+                        data-title="Boutique E-commerce"
+                        data-image="../dfc8cbcfbd1e5ede9e0f02b3c43f8a21.jpg"
+                        data-description="Développement d'une boutique en ligne moderne, rapide et sécurisée.">
+                        <img src="../dfc8cbcfbd1e5ede9e0f02b3c43f8a21.jpg" alt="Boutique E-commerce" class="w-full h-52 object-cover">
+                        <div class="p-5">
+                            <p class="text-xs font-semibold text-blue-600 mb-2">Développement Web</p>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Boutique E-commerce</h3>
+                            <p class="text-sm text-slate-600">Développement d'une boutique en ligne moderne, rapide et sécurisée.</p>
+                        </div>
+                    </article>
+
+                    <!-- Carte Projet -->
+                    <article
+                        class="portfolio-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer border border-slate-200"
+                        data-category="Applications"
+                        data-title="Application Mobile"
+                        data-image="../ea25b95af7a45615c15e1d2f37a50a15.jpg"
+                        data-description="Conception d'une application mobile intuitive offrant une excellente expérience utilisateur.">
+                        <img src="../ea25b95af7a45615c15e1d2f37a50a15.jpg" alt="Application Mobile" class="w-full h-52 object-cover">
+                        <div class="p-5">
+                            <p class="text-xs font-semibold text-blue-600 mb-2">Applications</p>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Application Mobile</h3>
+                            <p class="text-sm text-slate-600">Conception d'une application mobile intuitive offrant une excellente expérience utilisateur.</p>
+                        </div>
+                    </article>
+
+                    <!-- Carte Projet -->
+                    <article
+                        class="portfolio-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer border border-slate-200"
+                        data-category="Applications"
+                        data-title="Dashboard Administrateur"
+                        data-image="../38c7ceb92d7ee385970135ac917c3fa6.jpg"
+                        data-description="Création d'un tableau de bord moderne permettant la gestion des utilisateurs et des données.">
+                        <img src="../38c7ceb92d7ee385970135ac917c3fa6.jpg" alt="Dashboard Administrateur" class="w-full h-52 object-cover">
+                        <div class="p-5">
+                            <p class="text-xs font-semibold text-blue-600 mb-2">Applications</p>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Dashboard Administrateur</h3>
+                            <p class="text-sm text-slate-600">Création d'un tableau de bord moderne permettant la gestion des utilisateurs et des données.</p>
+                        </div>
+                    </article>
+
+                    <!-- Carte Projet -->
+                    <article
+                        class="portfolio-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer border border-slate-200"
+                        data-category="UI/UX Design"
+                        data-title="Prototype UI/UX"
+                        data-image="../32926475d806806d78f7ee1fb14c8705.jpg"
+                        data-description="Réalisation d'une interface utilisateur moderne conçue sur Figma avant le développement.">
+                        <img src="../32926475d806806d78f7ee1fb14c8705.jpg" alt="Prototype UI/UX" class="w-full h-52 object-cover">
+                        <div class="p-5">
+                            <p class="text-xs font-semibold text-blue-600 mb-2">UI/UX Design</p>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Prototype UI/UX</h3>
+                            <p class="text-sm text-slate-600">Réalisation d'une interface utilisateur moderne conçue sur Figma avant le développement.</p>
+                        </div>
+                    </article>
+
+                    <!-- Carte Projet -->
+                    <article
+                        class="portfolio-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer border border-slate-200"
+                        data-category="Intelligence Artificielle"
+                        data-title="Intelligence Artificielle"
+                        data-image="../7494e727ccc83c930132ae53c120cf2d.jpg"
+                        data-description="Développement de solutions intelligentes intégrant l'IA afin d'automatiser certaines tâches et améliorer l'expérience utilisateur.">
+                        <img src="../7494e727ccc83c930132ae53c120cf2d.jpg" alt="Intelligence Artificielle" class="w-full h-52 object-cover">
+                        <div class="p-5">
+                            <p class="text-xs font-semibold text-blue-600 mb-2">Intelligence Artificielle</p>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Intelligence Artificielle</h3>
+                            <p class="text-sm text-slate-600">Développement de solutions intelligentes intégrant l'IA afin d'automatiser certaines tâches et améliorer l'expérience utilisateur.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modale -->
+        <div id="portfolio-modal" class="fixed inset-0 bg-slate-900/70 z-50 hidden items-center justify-center p-4">
+            <div id="portfolio-modal-content" class="bg-white rounded-2xl shadow-xl max-w-3xl w-full overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
+                <img id="portfolio-modal-image" src="" alt="Projet sélectionné" class="w-full h-72 object-cover">
+                <div class="p-6">
+                    <p id="portfolio-modal-category" class="text-xs font-semibold text-blue-600 mb-2"></p>
+                    <h3 id="portfolio-modal-title" class="text-2xl font-bold text-slate-900 mb-3"></h3>
+                    <p id="portfolio-modal-description" class="text-slate-600 mb-6"></p>
+                    <button type="button" id="portfolio-modal-close" class="px-5 py-2.5 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition duration-300">
+                        Fermer
+                    </button>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <hr>
@@ -454,6 +581,76 @@
                 // Change l'icone selon l'etat ouvert/ferme.
                 icon.textContent = answer.classList.contains("max-h-96") ? "-" : "+";
             });
+        });
+
+        // Filtrage du portfolio via data-category et classes utilitaires.
+        const portfolioFilterButtons = document.querySelectorAll(".portfolio-filter-btn");
+        const portfolioCards = document.querySelectorAll(".portfolio-card");
+
+        portfolioFilterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const selectedCategory = button.dataset.filter;
+
+                // Met en avant le bouton actif et remet les autres en etat normal.
+                portfolioFilterButtons.forEach((btn) => {
+                    btn.classList.remove("bg-blue-600", "text-white");
+                    btn.classList.add("bg-white", "text-slate-700");
+                });
+                button.classList.remove("bg-white", "text-slate-700");
+                button.classList.add("bg-blue-600", "text-white");
+
+                // Affiche ou masque les cartes selon leur data-category, sans rechargement.
+                portfolioCards.forEach((card) => {
+                    const cardCategory = card.dataset.category;
+                    const shouldShow = selectedCategory === "Tous" || cardCategory === selectedCategory;
+                    card.classList.toggle("hidden", !shouldShow);
+                });
+            });
+        });
+
+        // Gestion de la modale: ouverture au clic sur carte, fermeture via bouton ou zone externe.
+        const portfolioModal = document.querySelector("#portfolio-modal");
+        const portfolioModalContent = document.querySelector("#portfolio-modal-content");
+        const portfolioModalImage = document.querySelector("#portfolio-modal-image");
+        const portfolioModalCategory = document.querySelector("#portfolio-modal-category");
+        const portfolioModalTitle = document.querySelector("#portfolio-modal-title");
+        const portfolioModalDescription = document.querySelector("#portfolio-modal-description");
+        const portfolioModalCloseButton = document.querySelector("#portfolio-modal-close");
+
+        const openPortfolioModal = (card) => {
+            portfolioModalImage.src = card.dataset.image;
+            portfolioModalImage.alt = card.dataset.title;
+            portfolioModalCategory.textContent = card.dataset.category;
+            portfolioModalTitle.textContent = card.dataset.title;
+            portfolioModalDescription.textContent = card.dataset.description;
+
+            portfolioModal.classList.remove("hidden");
+            portfolioModal.classList.add("flex");
+            requestAnimationFrame(() => {
+                portfolioModalContent.classList.remove("scale-95", "opacity-0");
+                portfolioModalContent.classList.add("scale-100", "opacity-100");
+            });
+        };
+
+        const closePortfolioModal = () => {
+            portfolioModalContent.classList.remove("scale-100", "opacity-100");
+            portfolioModalContent.classList.add("scale-95", "opacity-0");
+            setTimeout(() => {
+                portfolioModal.classList.remove("flex");
+                portfolioModal.classList.add("hidden");
+            }, 250);
+        };
+
+        portfolioCards.forEach((card) => {
+            card.addEventListener("click", () => openPortfolioModal(card));
+        });
+
+        portfolioModalCloseButton.addEventListener("click", closePortfolioModal);
+
+        portfolioModal.addEventListener("click", (event) => {
+            if (event.target === portfolioModal) {
+                closePortfolioModal();
+            }
         });
     </script>
 </body>
