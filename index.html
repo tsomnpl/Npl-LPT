@@ -482,6 +482,43 @@
             </div>
         </section>
 
+        <!-- Section Inspiration Future-Tech -->
+        <section class="py-16 px-4 bg-white border border-slate-200 rounded-3xl my-8 shadow-md">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-center text-3xl font-bold mb-4 text-slate-900 border-none">
+                    💡 Inspiration Future-Tech
+                </h2>
+                <p class="text-center text-slate-600 mb-10">
+                    Découvrez une idée, un conseil ou une citation différente à chaque clic pour vous inspirer dans votre parcours numérique.
+                </p>
+
+                <!-- Zone d'affichage -->
+                <div class="bg-white border border-slate-200 rounded-xl shadow-md p-8 text-center">
+                    <h3 class="text-xl font-bold text-slate-900 mb-4">Citation du moment</h3>
+                    <p id="inspiration-text" class="text-slate-600 text-lg leading-relaxed min-h-[90px]"></p>
+
+                    <!-- Boutons -->
+                    <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <button
+                            type="button"
+                            id="inspiration-discover-btn"
+                            class="px-5 py-2.5 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition duration-300">
+                            Découvrir
+                        </button>
+                        <button
+                            type="button"
+                            id="inspiration-copy-btn"
+                            class="px-5 py-2.5 rounded-lg bg-white border border-slate-300 text-slate-700 font-medium hover:bg-slate-100 transition duration-300">
+                            Copier
+                        </button>
+                    </div>
+                    <p id="inspiration-copy-feedback" class="text-green-600 text-sm mt-3 opacity-0 transition duration-300">
+                        ✅ Citation copiée !
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <!-- Modale -->
         <div id="portfolio-modal" class="fixed inset-0 bg-slate-900/70 z-50 hidden items-center justify-center p-4">
             <div id="portfolio-modal-content" class="bg-white rounded-2xl shadow-xl max-w-3xl w-full overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
@@ -652,6 +689,67 @@
                 closePortfolioModal();
             }
         });
+
+        // Tableau des citations/conseils Future-Tech (au moins 10 elements).
+        const inspirationQuotes = [
+            "L'innovation commence toujours par une idée.",
+            "Le design UI/UX place toujours l'utilisateur au centre.",
+            "Un bon site web inspire confiance dès les premières secondes.",
+            "L'intelligence artificielle améliore les expériences numériques.",
+            "Chaque ligne de code est une opportunité de créer quelque chose d'utile.",
+            "Le responsive design est indispensable aujourd'hui.",
+            "La cybersécurité protège la valeur de vos projets.",
+            "Un projet réussi commence par une bonne planification.",
+            "Tester son application est aussi important que la développer.",
+            "Future-Tech accompagne les entreprises vers leur transformation digitale."
+        ];
+
+        const inspirationText = document.querySelector("#inspiration-text");
+        const inspirationDiscoverBtn = document.querySelector("#inspiration-discover-btn");
+        const inspirationCopyBtn = document.querySelector("#inspiration-copy-btn");
+        const inspirationCopyFeedback = document.querySelector("#inspiration-copy-feedback");
+        let inspirationFeedbackTimer;
+
+        // Cette fonction utilise Math.random() pour choisir une citation au hasard.
+        const showRandomInspiration = () => {
+            const randomIndex = Math.floor(Math.random() * inspirationQuotes.length);
+            inspirationText.innerText = inspirationQuotes[randomIndex];
+        };
+
+        // Bouton "Decouvrir": affiche une nouvelle citation sans recharger la page.
+        inspirationDiscoverBtn.addEventListener("click", () => {
+            showRandomInspiration();
+        });
+
+        // Bouton "Copier": copie la citation actuelle et affiche un message temporaire.
+        inspirationCopyBtn.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(inspirationText.innerText);
+                inspirationCopyFeedback.innerText = "✅ Citation copiée !";
+                inspirationCopyFeedback.classList.remove("opacity-0");
+                inspirationCopyFeedback.classList.add("opacity-100");
+
+                clearTimeout(inspirationFeedbackTimer);
+                inspirationFeedbackTimer = setTimeout(() => {
+                    inspirationCopyFeedback.classList.remove("opacity-100");
+                    inspirationCopyFeedback.classList.add("opacity-0");
+                }, 2500);
+            } catch (error) {
+                inspirationCopyFeedback.innerText = "Impossible de copier la citation.";
+                inspirationCopyFeedback.classList.remove("opacity-0");
+                inspirationCopyFeedback.classList.add("opacity-100");
+
+                clearTimeout(inspirationFeedbackTimer);
+                inspirationFeedbackTimer = setTimeout(() => {
+                    inspirationCopyFeedback.classList.remove("opacity-100");
+                    inspirationCopyFeedback.classList.add("opacity-0");
+                    inspirationCopyFeedback.innerText = "✅ Citation copiée !";
+                }, 2500);
+            }
+        });
+
+        // Affiche une premiere citation aleatoire au chargement de la page.
+        showRandomInspiration();
     </script>
 </body>
 </html>
