@@ -519,6 +519,40 @@
             </div>
         </section>
 
+        <!-- Section Calculateur -->
+        <section class="py-16 px-4 bg-white border border-slate-200 rounded-3xl my-8 shadow-md">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-center text-3xl font-bold mb-4 text-slate-900 border-none">
+                    💰 Estimez votre budget
+                </h2>
+                <p class="text-center text-slate-600 mb-10">
+                    Entrez votre budget prévu afin de découvrir la catégorie de projet qui vous correspond.
+                </p>
+
+                <div id="budget-calculator-card" class="bg-white border border-slate-200 rounded-xl shadow-md p-8 transition duration-300">
+                    <!-- Champ de saisie -->
+                    <input
+                        id="budget-input"
+                        type="number"
+                        placeholder="Ex : 500000 FCFA"
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 mb-4">
+
+                    <!-- Bouton -->
+                    <button
+                        id="budget-analyze-btn"
+                        type="button"
+                        class="w-full sm:w-auto px-6 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition duration-300">
+                        Analyser
+                    </button>
+
+                    <!-- Résultat -->
+                    <p id="budget-result" class="mt-5 text-slate-700 font-medium leading-relaxed">
+                        Entrez un budget puis cliquez sur Analyser.
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <!-- Modale -->
         <div id="portfolio-modal" class="fixed inset-0 bg-slate-900/70 z-50 hidden items-center justify-center p-4">
             <div id="portfolio-modal-content" class="bg-white rounded-2xl shadow-xl max-w-3xl w-full overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
@@ -750,6 +784,77 @@
 
         // Affiche une premiere citation aleatoire au chargement de la page.
         showRandomInspiration();
+
+        const budgetInput = document.querySelector("#budget-input");
+        const budgetAnalyzeBtn = document.querySelector("#budget-analyze-btn");
+        const budgetResult = document.querySelector("#budget-result");
+        const budgetCalculatorCard = document.querySelector("#budget-calculator-card");
+
+        const budgetStyleClasses = [
+            "bg-red-50", "border-red-200",
+            "bg-orange-50", "border-orange-200",
+            "bg-blue-50", "border-blue-200",
+            "bg-green-50", "border-green-200",
+            "bg-white", "border-slate-200"
+        ];
+
+        budgetAnalyzeBtn.addEventListener("click", () => {
+            // Recuperation de la valeur saisie dans le champ input.
+            const rawBudgetValue = budgetInput.value;
+
+            // Conversion de la valeur en nombre entier avec parseInt().
+            const budget = parseInt(rawBudgetValue, 10);
+
+            // Reset du style avant de reappliquer la couleur selon le resultat.
+            budgetCalculatorCard.classList.remove(...budgetStyleClasses);
+            budgetCalculatorCard.classList.add("bg-white", "border-slate-200");
+
+            // Gestion des erreurs : champ vide.
+            if (rawBudgetValue.trim() === "") {
+                budgetResult.innerText = "Veuillez entrer un budget.";
+                return;
+            }
+
+            // Gestion des erreurs : valeur non numerique.
+            if (Number.isNaN(budget)) {
+                budgetResult.innerText = "Entrée invalide.";
+                return;
+            }
+
+            // Gestion des erreurs : valeur negative.
+            if (budget < 0) {
+                budgetResult.innerText = "Veuillez entrer un montant valide.";
+                return;
+            }
+
+            // Conditions de budget + affichage dynamique avec innerText.
+            if (budget < 100000) {
+                budgetResult.innerText = "Votre budget est adapté à une simple page vitrine.";
+                // Changement automatique du style pour petit budget.
+                budgetCalculatorCard.classList.remove("bg-white", "border-slate-200");
+                budgetCalculatorCard.classList.add("bg-red-50", "border-red-200");
+            } else if (budget >= 100000 && budget <= 300000) {
+                budgetResult.innerText = "Vous pouvez développer un site vitrine professionnel.";
+                // Changement automatique du style pour budget moyen.
+                budgetCalculatorCard.classList.remove("bg-white", "border-slate-200");
+                budgetCalculatorCard.classList.add("bg-orange-50", "border-orange-200");
+            } else if (budget > 300000 && budget <= 700000) {
+                budgetResult.innerText = "Votre budget permet la création d'une boutique e-commerce.";
+                // Changement automatique du style pour bon budget.
+                budgetCalculatorCard.classList.remove("bg-white", "border-slate-200");
+                budgetCalculatorCard.classList.add("bg-blue-50", "border-blue-200");
+            } else if (budget > 700000 && budget <= 1500000) {
+                budgetResult.innerText = "Votre budget est adapté à une application web complète.";
+                // Changement automatique du style pour budget eleve.
+                budgetCalculatorCard.classList.remove("bg-white", "border-slate-200");
+                budgetCalculatorCard.classList.add("bg-blue-50", "border-blue-200");
+            } else {
+                budgetResult.innerText = "Votre budget permet de développer une solution numérique avancée intégrant des technologies modernes comme l'Intelligence Artificielle.";
+                // Changement automatique du style pour tres gros budget.
+                budgetCalculatorCard.classList.remove("bg-white", "border-slate-200");
+                budgetCalculatorCard.classList.add("bg-green-50", "border-green-200");
+            }
+        });
     </script>
 </body>
 </html>
