@@ -553,6 +553,45 @@
             </div>
         </section>
 
+        <!-- Section Gestionnaire de tâches -->
+        <section class="py-16 px-4 bg-white border border-slate-200 rounded-3xl my-8 shadow-md">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-center text-3xl font-bold mb-4 text-slate-900 border-none">
+                    📋 Gestionnaire de tâches
+                </h2>
+                <p class="text-center text-slate-600 mb-10">
+                    Ajoutez, organisez et suivez les tâches de votre projet Future-Tech.
+                </p>
+
+                <div class="bg-white border border-slate-200 rounded-xl shadow-md p-8">
+                    <div class="flex flex-col sm:flex-row gap-3 mb-4">
+                        <!-- Champ de saisie -->
+                        <input
+                            id="task-input"
+                            type="text"
+                            placeholder="Exemple : Concevoir la maquette Figma"
+                            class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+
+                        <!-- Bouton Ajouter -->
+                        <button
+                            id="task-add-btn"
+                            type="button"
+                            class="px-6 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition duration-300">
+                            Ajouter
+                        </button>
+                    </div>
+
+                    <p id="task-error" class="text-red-600 text-sm mb-3 hidden">Veuillez saisir une tâche.</p>
+
+                    <!-- Liste des tâches -->
+                    <ul id="task-list" class="space-y-3"></ul>
+
+                    <!-- Compteur -->
+                    <p id="task-counter" class="mt-6 text-slate-700 font-medium">Tâches restantes : 0</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Modale -->
         <div id="portfolio-modal" class="fixed inset-0 bg-slate-900/70 z-50 hidden items-center justify-center p-4">
             <div id="portfolio-modal-content" class="bg-white rounded-2xl shadow-xl max-w-3xl w-full overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
@@ -855,6 +894,124 @@
                 budgetCalculatorCard.classList.add("bg-green-50", "border-green-200");
             }
         });
+
+        const taskInput = document.querySelector("#task-input");
+        const taskAddBtn = document.querySelector("#task-add-btn");
+        const taskList = document.querySelector("#task-list");
+        const taskCounter = document.querySelector("#task-counter");
+        const taskError = document.querySelector("#task-error");
+        const taskStorageKey = "futureTechTasks";
+
+        // Met a jour le compteur des taches non terminees.
+        const updateTaskCounter = () => {
+            const activeTasksCount = taskList.querySelectorAll("li:not(.task-done)").length;
+            taskCounter.innerText = `Tâches restantes : ${activeTasksCount}`;
+        };
+
+        // Sauvegarde l'etat complet de la liste dans localStorage.
+        const saveTasksToLocalStorage = () => {
+            const tasksData = [];
+            taskList.querySelectorAll("li").forEach((taskItem) => {
+                const taskTextElement = taskItem.querySelector(".task-text");
+                const isDone = taskItem.classList.contains("task-done");
+                tasksData.push({
+                    text: taskTextElement.innerText,
+                    done: isDone
+                });
+            });
+            localStorage.setItem(taskStorageKey, JSON.stringify(tasksData));
+        };
+
+        // Creation dynamique d'une tache avec createElement() et insertion via appendChild().
+        const createTaskElement = (taskText, isDone = false) => {
+            const taskItem = document.createElement("li");
+            taskItem.className = "flex items-center justify-between gap-3 bg-slate-50 border border-slate-200 rounded-lg px-4 py-3";
+
+            const taskLeft = document.createElement("div");
+            taskLeft.className = "flex items-center gap-2 min-w-0";
+
+            const taskStatus = document.createElement("span");
+            taskStatus.className = "task-status text-slate-500";
+            taskStatus.innerText = isDone ? "✓" : "☐";
+
+            const taskTextSpan = document.createElement("span");
+            taskTextSpan.className = "task-text text-slate-700 break-words";
+            taskTextSpan.innerText = taskText;
+
+            taskLeft.appendChild(taskStatus);
+            taskLeft.appendChild(taskTextSpan);
+
+            const taskActions = document.createElement("div");
+            taskActions.className = "flex items-center gap-2 shrink-0";
+
+            const processButton = document.createElement("button");
+            processButton.type = "button";
+            processButton.className = "px-3 py-1.5 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition duration-300";
+            processButton.innerText = "Traiter";
+
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.className = "px-3 py-1.5 rounded-md bg-slate-200 text-slate-700 text-sm font-medium hover:bg-slate-300 transition duration-300";
+            deleteButton.innerText = "Supprimer";
+
+            // Tache terminee: classList.toggle() permet de barrer/retablir la tache.
+            processButton.addEventListener("click", () => {
+                taskItem.classList.toggle("task-done");
+                taskTextSpan.classList.toggle("line-through");
+                taskTextSpan.classList.toggle("text-slate-400");
+                taskStatus.innerText = taskItem.classList.contains("task-done") ? "✓" : "☐";
+                updateTaskCounter();
+                saveTasksToLocalStorage();
+            });
+
+            // Suppression: retire uniquement la tache cible.
+            deleteButton.addEventListener("click", () => {
+                taskItem.remove();
+                updateTaskCounter();
+                saveTasksToLocalStorage();
+            });
+
+            taskActions.appendChild(processButton);
+            taskActions.appendChild(deleteButton);
+
+            taskItem.appendChild(taskLeft);
+            taskItem.appendChild(taskActions);
+
+            if (isDone) {
+                taskItem.classList.add("task-done");
+                taskTextSpan.classList.add("line-through", "text-slate-400");
+            }
+
+            // Ajout de la tache dans la liste visuelle.
+            taskList.appendChild(taskItem);
+        };
+
+        // Chargement automatique des donnees sauvegardees au rechargement.
+        const loadTasksFromLocalStorage = () => {
+            const savedTasks = JSON.parse(localStorage.getItem(taskStorageKey) || "[]");
+            savedTasks.forEach((task) => {
+                createTaskElement(task.text, task.done);
+            });
+            updateTaskCounter();
+        };
+
+        taskAddBtn.addEventListener("click", () => {
+            const taskText = taskInput.value.trim();
+
+            // Gestion d'erreur: champ vide.
+            if (!taskText) {
+                taskError.classList.remove("hidden");
+                return;
+            }
+
+            taskError.classList.add("hidden");
+            createTaskElement(taskText, false);
+            taskInput.value = "";
+            updateTaskCounter();
+            saveTasksToLocalStorage();
+        });
+
+        loadTasksFromLocalStorage();
     </script>
 </body>
 </html>
