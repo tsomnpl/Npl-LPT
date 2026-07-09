@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Liaison du fichier CSS externe -->
     <link rel="stylesheet" href="style.css">
@@ -88,6 +89,68 @@
             </section>
         </div>
 
+        <hr>
+
+        <!-- Formulaire de contact -->
+        <section class="card">
+            <h2>Parlons de votre projet</h2>
+            <p>
+                Décrivez votre besoin et nous vous répondrons rapidement avec une proposition adaptée.
+            </p>
+
+            <form id="contactForm" class="mt-6 space-y-5">
+                <!-- Champ Nom -->
+                <div>
+                    <label for="name" class="block text-sm font-semibold text-slate-700 mb-2">Nom</label>
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Votre nom"
+                        class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 shadow-sm outline-none transition duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    >
+                    <p id="nameError" class="mt-2 min-h-[1.25rem] text-sm font-medium text-red-600"></p>
+                </div>
+
+                <!-- Champ Email -->
+                <div>
+                    <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">Email</label>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Votre adresse email"
+                        class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 shadow-sm outline-none transition duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    >
+                    <p id="emailError" class="mt-2 min-h-[1.25rem] text-sm font-medium text-red-600"></p>
+                </div>
+
+                <!-- Champ Message -->
+                <div>
+                    <label for="message" class="block text-sm font-semibold text-slate-700 mb-2">Message</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                        placeholder="Décrivez votre projet ou votre demande..."
+                        class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 shadow-sm outline-none transition duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    ></textarea>
+                    <p id="messageError" class="mt-2 min-h-[1.25rem] text-sm font-medium text-red-600"></p>
+                </div>
+
+                <!-- Bouton Envoyer -->
+                <button
+                    type="submit"
+                    class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-sm transition duration-200 hover:bg-blue-700 hover:shadow-md active:scale-[0.99]"
+                >
+                    Envoyer le message
+                </button>
+
+                <!-- Zone des messages -->
+                <p id="formMessage" class="min-h-[1.5rem] text-sm font-semibold text-emerald-600 transition duration-200"></p>
+            </form>
+        </section>
+
     </main>
 
     <hr>
@@ -96,6 +159,104 @@
     <footer>
         <p>&copy; 2026 Future-Tech - Projet fil rouge de développement web.</p>
     </footer>
+
+    <script>
+        const contactForm = document.getElementById("contactForm");
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const messageInput = document.getElementById("message");
+        const nameError = document.getElementById("nameError");
+        const emailError = document.getElementById("emailError");
+        const messageError = document.getElementById("messageError");
+        const formMessage = document.getElementById("formMessage");
+
+        const errorClass = ["border-red-500", "ring-2", "ring-red-100"];
+
+        // Affiche une erreur sous un champ et applique une bordure rouge.
+        function showError(field, errorElement, message) {
+            errorElement.innerText = `⚠️ ${message}`;
+            field.classList.add(...errorClass);
+        }
+
+        // Supprime l'erreur d'un champ quand la valeur redevient valide.
+        function clearError(field, errorElement) {
+            errorElement.innerText = "";
+            field.classList.remove(...errorClass);
+        }
+
+        // Récupération et validation du nom (champ obligatoire avec trim).
+        function validateName() {
+            const nameValue = nameInput.value.trim();
+            if (!nameValue) {
+                showError(nameInput, nameError, "Veuillez entrer votre nom.");
+                return false;
+            }
+            clearError(nameInput, nameError);
+            return true;
+        }
+
+        // Récupération et validation de l'email (obligatoire + format valide).
+        function validateEmail() {
+            const emailValue = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailValue) {
+                showError(emailInput, emailError, "Veuillez entrer votre adresse email.");
+                return false;
+            }
+
+            if (!emailRegex.test(emailValue)) {
+                showError(emailInput, emailError, "Veuillez entrer une adresse email valide.");
+                return false;
+            }
+
+            clearError(emailInput, emailError);
+            return true;
+        }
+
+        // Récupération et validation du message (obligatoire, min 20 caractères).
+        function validateMessage() {
+            const messageValue = messageInput.value.trim();
+
+            if (!messageValue) {
+                showError(messageInput, messageError, "Veuillez saisir votre message.");
+                return false;
+            }
+
+            if (messageValue.length < 20) {
+                showError(messageInput, messageError, "Votre message doit contenir au moins 20 caractères.");
+                return false;
+            }
+
+            clearError(messageInput, messageError);
+            return true;
+        }
+
+        // Validation en direct pour faire disparaître les erreurs automatiquement.
+        nameInput.addEventListener("input", validateName);
+        emailInput.addEventListener("input", validateEmail);
+        messageInput.addEventListener("input", validateMessage);
+
+        // preventDefault() bloque l'envoi natif et permet d'afficher les erreurs/succès.
+        contactForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            formMessage.innerText = "";
+
+            // Validation complète des trois champs avant d'autoriser le succès.
+            const isNameValid = validateName();
+            const isEmailValid = validateEmail();
+            const isMessageValid = validateMessage();
+
+            // Affichage du succès si toutes les validations passent.
+            if (isNameValid && isEmailValid && isMessageValid) {
+                formMessage.innerText = "✅ Votre message a été envoyé avec succès !";
+                contactForm.reset();
+                clearError(nameInput, nameError);
+                clearError(emailInput, emailError);
+                clearError(messageInput, messageError);
+            }
+        });
+    </script>
 
 </body>
 </html>
