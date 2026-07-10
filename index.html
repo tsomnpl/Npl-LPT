@@ -592,6 +592,61 @@
             </div>
         </section>
 
+        <!-- Section Quiz -->
+        <section class="py-16 px-4 bg-white border border-slate-200 rounded-3xl my-8 shadow-md">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-center text-3xl font-bold mb-4 text-slate-900 border-none">
+                    🧠 Quiz Future-Tech
+                </h2>
+                <p class="text-center text-slate-600 mb-10">
+                    Testez vos connaissances sur le développement web, le design UI/UX, les applications mobiles et l'intelligence artificielle.
+                </p>
+
+                <div class="bg-white border border-slate-200 rounded-xl shadow-md p-8">
+                    <!-- Timer -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between text-sm font-medium text-slate-700 mb-2">
+                            <span>Temps restant</span>
+                            <span id="quiz-timer-text">15s</span>
+                        </div>
+                        <div class="w-full h-2.5 rounded-full bg-slate-100 overflow-hidden">
+                            <div id="quiz-timer-progress" class="h-full w-full bg-blue-600 transition-all duration-1000 ease-linear"></div>
+                        </div>
+                    </div>
+
+                    <!-- Question -->
+                    <p id="quiz-question-counter" class="text-sm font-medium text-blue-600 mb-2"></p>
+                    <h3 id="quiz-question-text" class="text-xl font-bold text-slate-900 mb-6"></h3>
+
+                    <!-- Réponses -->
+                    <div id="quiz-options" class="space-y-3"></div>
+
+                    <!-- Bouton Suivant -->
+                    <button
+                        type="button"
+                        id="quiz-next-btn"
+                        class="mt-6 px-6 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition duration-300 disabled:bg-slate-300 disabled:cursor-not-allowed">
+                        Suivant
+                    </button>
+
+                    <!-- Score -->
+                    <div id="quiz-score" class="mt-8 p-5 rounded-lg border border-slate-200 bg-slate-50 hidden">
+                        <p class="text-slate-900 font-semibold mb-1">Vous avez obtenu :</p>
+                        <p id="quiz-score-value" class="text-2xl font-bold text-blue-700 mb-3">0 / 5</p>
+                        <p id="quiz-result-message" class="text-slate-700"></p>
+                    </div>
+
+                    <!-- Bouton Recommencer -->
+                    <button
+                        type="button"
+                        id="quiz-restart-btn"
+                        class="mt-4 px-6 py-3 rounded-lg bg-white border border-slate-300 text-slate-700 font-medium hover:bg-slate-100 transition duration-300 hidden">
+                        Recommencer
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <!-- Modale -->
         <div id="portfolio-modal" class="fixed inset-0 bg-slate-900/70 z-50 hidden items-center justify-center p-4">
             <div id="portfolio-modal-content" class="bg-white rounded-2xl shadow-xl max-w-3xl w-full overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
@@ -1010,6 +1065,219 @@
             updateTaskCounter();
             saveTasksToLocalStorage();
         });
+
+        // Tableau des questions du quiz (question, 4 choix, bonne reponse).
+        const quizQuestions = [
+            {
+                question: "Quel est le principal objectif d'un site responsive ?",
+                options: [
+                    "A. Être plus coloré",
+                    "B. Fonctionner sur tous les appareils",
+                    "C. Télécharger plus rapidement",
+                    "D. Ajouter des animations"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Quel outil est principalement utilisé pour concevoir une interface utilisateur ?",
+                options: [
+                    "A. MySQL",
+                    "B. Git",
+                    "C. Figma",
+                    "D. Docker"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "Quelle technologie est principalement utilisée pour styliser une page web ?",
+                options: [
+                    "A. HTML",
+                    "B. CSS",
+                    "C. SQL",
+                    "D. Python"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Quel est le rôle principal de JavaScript ?",
+                options: [
+                    "A. Gérer les bases de données",
+                    "B. Ajouter de l'interactivité aux pages web",
+                    "C. Créer des images",
+                    "D. Héberger un site"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "Future-Tech accompagne principalement :",
+                options: [
+                    "A. Les entreprises et entrepreneurs dans leurs projets numériques",
+                    "B. Les clubs de football",
+                    "C. Les agences immobilières uniquement",
+                    "D. Les jeux vidéo"
+                ],
+                correctAnswer: 0
+            }
+        ];
+
+        const quizQuestionCounter = document.querySelector("#quiz-question-counter");
+        const quizQuestionText = document.querySelector("#quiz-question-text");
+        const quizOptions = document.querySelector("#quiz-options");
+        const quizNextBtn = document.querySelector("#quiz-next-btn");
+        const quizScore = document.querySelector("#quiz-score");
+        const quizScoreValue = document.querySelector("#quiz-score-value");
+        const quizResultMessage = document.querySelector("#quiz-result-message");
+        const quizRestartBtn = document.querySelector("#quiz-restart-btn");
+        const quizTimerText = document.querySelector("#quiz-timer-text");
+        const quizTimerProgress = document.querySelector("#quiz-timer-progress");
+
+        let currentQuizQuestionIndex = 0;
+        let selectedQuizOptionIndex = null;
+        let quizScoreCount = 0;
+        let quizTimeLeft = 15;
+        let quizTimerInterval;
+
+        // Met a jour l'affichage du timer et de la barre de progression.
+        const updateQuizTimerDisplay = () => {
+            quizTimerText.innerText = `${quizTimeLeft}s`;
+            const progressPercentage = (quizTimeLeft / 15) * 100;
+            quizTimerProgress.style.width = `${progressPercentage}%`;
+        };
+
+        // Lance le timer de 15s pour chaque question avec setInterval().
+        const startQuizTimer = () => {
+            clearInterval(quizTimerInterval);
+            quizTimeLeft = 15;
+            updateQuizTimerDisplay();
+
+            quizTimerInterval = setInterval(() => {
+                quizTimeLeft -= 1;
+                updateQuizTimerDisplay();
+
+                if (quizTimeLeft <= 0) {
+                    clearInterval(quizTimerInterval);
+                    goToNextQuizQuestion(true);
+                }
+            }, 1000);
+        };
+
+        // Gere la selection visuelle d'une reponse avec classList.
+        const selectQuizOption = (optionButton, optionIndex) => {
+            selectedQuizOptionIndex = optionIndex;
+            quizNextBtn.disabled = false;
+
+            const allOptionButtons = quizOptions.querySelectorAll("button");
+            allOptionButtons.forEach((button) => {
+                button.classList.remove("border-blue-500", "bg-blue-50", "text-blue-700");
+                button.classList.add("border-slate-300", "bg-white", "text-slate-700");
+            });
+
+            optionButton.classList.remove("border-slate-300", "bg-white", "text-slate-700");
+            optionButton.classList.add("border-blue-500", "bg-blue-50", "text-blue-700");
+        };
+
+        // Affichage dynamique d'une seule question a la fois.
+        const renderQuizQuestion = () => {
+            const currentQuestion = quizQuestions[currentQuizQuestionIndex];
+            selectedQuizOptionIndex = null;
+            quizNextBtn.disabled = true;
+
+            quizQuestionCounter.innerText = `Question ${currentQuizQuestionIndex + 1} / ${quizQuestions.length}`;
+            quizQuestionText.innerText = currentQuestion.question;
+            quizOptions.innerHTML = "";
+
+            currentQuestion.options.forEach((option, optionIndex) => {
+                const optionButton = document.createElement("button");
+                optionButton.type = "button";
+                optionButton.innerText = option;
+                optionButton.className = "w-full text-left px-4 py-3 rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 transition duration-300";
+
+                optionButton.addEventListener("click", () => {
+                    selectQuizOption(optionButton, optionIndex);
+                });
+
+                quizOptions.appendChild(optionButton);
+            });
+        };
+
+        // Calcul du score puis passage a la question suivante (ou resultat final).
+        const goToNextQuizQuestion = (isAutoNext = false) => {
+            const currentQuestion = quizQuestions[currentQuizQuestionIndex];
+
+            if (!isAutoNext && selectedQuizOptionIndex === currentQuestion.correctAnswer) {
+                quizScoreCount += 1;
+            }
+
+            if (isAutoNext && selectedQuizOptionIndex !== null && selectedQuizOptionIndex === currentQuestion.correctAnswer) {
+                quizScoreCount += 1;
+            }
+
+            currentQuizQuestionIndex += 1;
+
+            if (currentQuizQuestionIndex < quizQuestions.length) {
+                renderQuizQuestion();
+                startQuizTimer();
+            } else {
+                showQuizResult();
+            }
+        };
+
+        // Affiche le score final + niveaux de resultat avec if / else.
+        const showQuizResult = () => {
+            clearInterval(quizTimerInterval);
+
+            quizQuestionCounter.innerText = "Quiz terminé";
+            quizQuestionText.innerText = "Merci d'avoir participé au Quiz Future-Tech !";
+            quizOptions.innerHTML = "";
+            quizNextBtn.classList.add("hidden");
+
+            quizScoreValue.innerText = `${quizScoreCount} / ${quizQuestions.length}`;
+
+            if (quizScoreCount <= 2) {
+                quizResultMessage.innerText = "Continuez à apprendre, vous êtes sur la bonne voie !";
+            } else if (quizScoreCount === 3 || quizScoreCount === 4) {
+                quizResultMessage.innerText = "Très bon travail ! Vous maîtrisez déjà une bonne partie des notions.";
+            } else {
+                quizResultMessage.innerText = "Excellent ! Vous maîtrisez parfaitement l'univers Future-Tech.";
+            }
+
+            quizScore.classList.remove("hidden");
+            quizRestartBtn.classList.remove("hidden");
+            quizTimerText.innerText = "0s";
+            quizTimerProgress.style.width = "0%";
+        };
+
+        // Reinitialise le quiz, le score, le timer et la barre de progression.
+        const restartQuiz = () => {
+            clearInterval(quizTimerInterval);
+            currentQuizQuestionIndex = 0;
+            selectedQuizOptionIndex = null;
+            quizScoreCount = 0;
+            quizTimeLeft = 15;
+
+            quizScore.classList.add("hidden");
+            quizRestartBtn.classList.add("hidden");
+            quizNextBtn.classList.remove("hidden");
+            quizNextBtn.disabled = true;
+
+            quizTimerText.innerText = "0s";
+            quizTimerProgress.style.width = "0%";
+
+            renderQuizQuestion();
+            startQuizTimer();
+        };
+
+        // Bouton "Suivant" avec addEventListener("click", ...).
+        quizNextBtn.addEventListener("click", () => {
+            goToNextQuizQuestion(false);
+        });
+
+        // Bouton "Recommencer" pour relancer tout le quiz.
+        quizRestartBtn.addEventListener("click", restartQuiz);
+
+        // Initialisation du quiz au chargement de la page.
+        renderQuizQuestion();
+        startQuizTimer();
 
         loadTasksFromLocalStorage();
     </script>
