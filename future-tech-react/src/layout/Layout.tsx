@@ -12,7 +12,7 @@ const Layout = ({ children }: LayoutProps) => {
       <header>
         <Navbar />
       </header>
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6">
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 sm:py-10">
         {children}
       </main>
       <Footer />

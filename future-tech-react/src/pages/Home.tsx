@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <section className="grid items-center gap-10 lg:grid-cols-2">
+    <section className="grid items-center gap-8 lg:grid-cols-2">
       <div>
         <p className="inline-block rounded-full bg-primary-100 px-3 py-1 text-sm font-medium text-primary-700">
           Future-Tech
@@ -31,7 +31,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft">
+      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft sm:p-6">
         <img
           src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"
           alt="Équipe Future-Tech en session de travail numérique"

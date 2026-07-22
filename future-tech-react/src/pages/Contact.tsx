@@ -1,7 +1,7 @@
 const Contact = () => {
   return (
-    <section className="grid gap-8 lg:grid-cols-2">
-      <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-soft">
+    <section className="grid gap-6 lg:grid-cols-2">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:p-8">
         <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">Contact</h1>
         <p className="mt-4 text-slate-600">
           Parlons de votre projet digital. Nous vous répondons rapidement avec une
@@ -39,7 +39,7 @@ const Contact = () => {
         </div>
       </div>
 
-      <form className="rounded-2xl border border-slate-200 bg-white p-8 shadow-soft">
+      <form className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:p-8">
         <h2 className="text-2xl font-semibold text-slate-900">Envoyer un message</h2>
         <div className="mt-6 space-y-4">
           <div>

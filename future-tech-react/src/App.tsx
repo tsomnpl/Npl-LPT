@@ -6,6 +6,7 @@ import Contact from "./pages/Contact";
 import Projects from "./pages/Projects";
 import ProjectDetails from "./pages/ProjectDetails";
 import Articles from "./pages/Articles";
+import ArticleDetails from "./pages/ArticleDetails";
 
 const App = () => {
   const location = useLocation();
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/:id" element={<ArticleDetails />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:id" element={<ProjectDetails />} />
           <Route path="*" element={<Navigate to="/" replace />} />

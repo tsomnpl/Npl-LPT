@@ -1,13 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-
-type Article = {
-  id: number;
-  title: string;
-  body: string;
-};
+import { Link } from "react-router-dom";
+import { ApiPost, FutureTechArticle, buildFutureTechArticles } from "../data/articles";
 
 const Articles = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
+  const [articles, setArticles] = useState<FutureTechArticle[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
@@ -23,8 +19,8 @@ const Articles = () => {
           throw new Error("Request failed");
         }
 
-        const data: Article[] = await response.json();
-        setArticles(data.slice(0, 12));
+        const data: ApiPost[] = await response.json();
+        setArticles(buildFutureTechArticles(data));
       } catch {
         setError("Impossible de récupérer les données.");
       } finally {
@@ -38,7 +34,9 @@ const Articles = () => {
   const filteredArticles = useMemo(
     () =>
       articles.filter((article) =>
-        article.title.toLowerCase().includes(search.trim().toLowerCase())
+        `${article.title} ${article.content}`
+          .toLowerCase()
+          .includes(search.trim().toLowerCase())
       ),
     [articles, search]
   );
@@ -56,7 +54,7 @@ const Articles = () => {
             type="text"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
-            placeholder="Rechercher un article par titre..."
+            placeholder="Rechercher un article..."
             className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-700 outline-none transition duration-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100"
           />
         </div>
@@ -76,7 +74,7 @@ const Articles = () => {
 
       {!isLoading && !error && filteredArticles.length === 0 && (
         <div className="rounded-xl border border-slate-200 bg-white p-6 text-slate-600 shadow-soft">
-          Aucun résultat trouvé.
+          Aucun article trouvé.
         </div>
       )}
 
@@ -87,18 +85,23 @@ const Articles = () => {
               key={article.id}
               className="rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 bg-white border border-slate-200 p-5"
             >
-              <h2 className="text-lg font-semibold text-slate-900 line-clamp-2">
+              <img
+                src={article.image}
+                alt={article.title}
+                className="aspect-video w-full rounded-xl object-cover"
+              />
+              <h2 className="mt-4 text-lg font-semibold text-slate-900 line-clamp-2">
                 {article.title}
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-slate-600 line-clamp-4">
-                {article.body}
+                {article.description}
               </p>
-              <button
-                type="button"
+              <Link
+                to={`/articles/${article.id}`}
                 className="mt-5 inline-flex rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white transition duration-300 hover:bg-primary-700"
               >
                 Voir plus
-              </button>
+              </Link>
             </article>
           ))}
         </div>

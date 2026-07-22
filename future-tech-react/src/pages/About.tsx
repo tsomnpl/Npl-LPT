@@ -18,8 +18,8 @@ const items = [
 
 const About = () => {
   return (
-    <section className="space-y-8">
-      <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-soft">
+    <section className="space-y-6">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:p-8">
         <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">À propos de Future-Tech</h1>
         <p className="mt-4 max-w-3xl text-slate-600">
           Future-Tech est un studio digital qui combine développement web, design UI/UX
@@ -39,7 +39,7 @@ const About = () => {
         ))}
       </div>
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-soft">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:p-8">
         <h2 className="text-2xl font-semibold text-slate-900">Fondateur</h2>
         <p className="mt-4 text-slate-600">
           Isaac TCHIWANOU est étudiant en Système d'Information et passionné par

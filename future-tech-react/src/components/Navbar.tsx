@@ -10,7 +10,7 @@ const links = [
 ];
 
 const baseLinkClass =
-  "rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-200";
+  "rounded-lg px-3 py-2 text-sm font-medium transition duration-300";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,7 +38,7 @@ const Navbar = () => {
           Future-Tech
         </Link>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-3 md:flex">
           {links.map((link) => (
             <div key={link.to}>{renderNavLink(link.to, link.label)}</div>
           ))}
@@ -56,8 +56,8 @@ const Navbar = () => {
       </div>
 
       <div
-        className={`overflow-hidden border-t border-slate-200 bg-white px-4 transition-all duration-300 md:hidden ${
-          isMenuOpen ? "max-h-48 py-3" : "max-h-0 py-0"
+        className={`overflow-hidden border-t border-slate-200 bg-white px-4 transition-all duration-300 ease-in-out md:hidden ${
+          isMenuOpen ? "max-h-72 py-3" : "max-h-0 py-0"
         }`}
       >
         <div className="flex flex-col gap-2">
