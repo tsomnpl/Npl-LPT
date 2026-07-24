@@ -17,6 +17,7 @@ const Projects = () => {
           <Card
             key={project.id}
             id={project.id}
+            to={`/projects/${project.id}`}
             title={project.title}
             image={project.image}
             description={project.description}

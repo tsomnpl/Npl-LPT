@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import Card from "../components/Card";
 import { ApiPost, FutureTechArticle, buildFutureTechArticles } from "../data/articles";
 
 const Articles = () => {
@@ -81,28 +81,14 @@ const Articles = () => {
       {!isLoading && !error && filteredArticles.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredArticles.map((article) => (
-            <article
+            <Card
               key={article.id}
-              className="rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 bg-white border border-slate-200 p-5"
-            >
-              <img
-                src={article.image}
-                alt={article.title}
-                className="aspect-video w-full rounded-xl object-cover"
-              />
-              <h2 className="mt-4 text-lg font-semibold text-slate-900 line-clamp-2">
-                {article.title}
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 line-clamp-4">
-                {article.description}
-              </p>
-              <Link
-                to={`/articles/${article.id}`}
-                className="mt-5 inline-flex rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white transition duration-300 hover:bg-primary-700"
-              >
-                Voir plus
-              </Link>
-            </article>
+              id={article.id}
+              to={`/articles/${article.id}`}
+              title={article.title}
+              image={article.image}
+              description={article.description}
+            />
           ))}
         </div>
       )}
