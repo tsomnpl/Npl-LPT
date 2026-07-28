@@ -1,0 +1,7 @@
+{
+  "buildCommand": "cd future-tech-next && npm install && npm run build",
+  "outputDirectory": "future-tech-next/.next",
+  "installCommand": "cd future-tech-next && npm install",
+  "framework": "nextjs",
+  "rootDirectory": "future-tech-next"
+}
