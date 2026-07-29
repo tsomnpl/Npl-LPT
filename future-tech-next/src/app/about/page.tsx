@@ -19,7 +19,7 @@ export default function About() {
         <div className="bg-white p-8 md:p-10 rounded-xl shadow-md border border-gray-100">
           <h2 className="text-2xl font-bold text-primary mb-4">Notre Vision</h2>
           <p className="text-lg text-primary-dark leading-relaxed">
-            Devenir un acteur de référence dans le développement d'applications web modernes, en repoussant constamment les limites de l'expérience utilisateur et des standards de qualité.
+            Devenir un acteur de référence dans le développement d&apos;applications web modernes, en repoussant constamment les limites de l&apos;expérience utilisateur et des standards de qualité.
           </p>
         </div>
 

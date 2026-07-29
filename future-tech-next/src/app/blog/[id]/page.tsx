@@ -91,34 +91,34 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
         <div className="prose prose-lg max-w-none text-primary-dark leading-relaxed">
           <p className="text-xl font-medium mb-8">
             Dans le monde en constante évolution de la technologie, il est primordial de rester à la pointe des nouvelles pratiques. 
-            Découvrez nos analyses, conseils et retours d'expérience sur ce sujet essentiel pour votre activité.
+            Découvrez nos analyses, conseils et retours d&apos;expérience sur ce sujet essentiel pour votre activité.
           </p>
           
           <h2 className="text-2xl font-bold text-primary mb-4 mt-8">Introduction</h2>
           <p className="mb-6">
-            L'écosystème numérique change chaque jour. L'impact de ces nouvelles technologies sur notre façon de développer 
+            L&apos;écosystème numérique change chaque jour. L&apos;impact de ces nouvelles technologies sur notre façon de développer
             et de concevoir des applications web ne peut plus être ignoré. Nous sommes entrés dans une nouvelle ère 
-            où l'innovation dicte le rythme du marché.
+            où l&apos;innovation dicte le rythme du marché.
           </p>
 
           <div className="bg-light p-6 rounded-2xl border-l-4 border-primary my-8">
             <p className="font-semibold text-primary m-0 italic">
-              "L'innovation est ce qui distingue un leader d'un suiveur. Adapter ses méthodes est la clé de la réussite."
+              &ldquo;L&apos;innovation est ce qui distingue un leader d&apos;un suiveur. Adapter ses méthodes est la clé de la réussite.&rdquo;
             </p>
           </div>
 
           <h2 className="text-2xl font-bold text-primary mb-4 mt-8">Les enjeux clés</h2>
           <p className="mb-6">
-            Pour bien maîtriser ce sujet, plusieurs points doivent être pris en compte. L'architecture, 
-            la sécurité, et bien sûr l'expérience utilisateur doivent rester au centre de toutes les décisions techniques. 
-            L'adoption de nouveaux paradigmes de développement nous permet aujourd'hui d'atteindre des niveaux 
+            Pour bien maîtriser ce sujet, plusieurs points doivent être pris en compte. L&apos;architecture,
+            la sécurité, et bien sûr l&apos;expérience utilisateur doivent rester au centre de toutes les décisions techniques.
+            L&apos;adoption de nouveaux paradigmes de développement nous permet aujourd&apos;hui d&apos;atteindre des niveaux
             de performance et de fiabilité jamais vus auparavant.
           </p>
           
           <h2 className="text-2xl font-bold text-primary mb-4 mt-8">Conclusion</h2>
           <p>
             En résumé, aborder cette thématique demande du temps, mais l'investissement en vaut largement la peine.
-            Chez Future-Tech, nous mettons un point d'honneur à implémenter ces concepts dans chacun de nos projets, 
+            Chez Future-Tech, nous mettons un point d&apos;honneur à implémenter ces concepts dans chacun de nos projets,
             afin de toujours garantir des solutions numériques modernes, scalables et durables.
           </p>
         </div>

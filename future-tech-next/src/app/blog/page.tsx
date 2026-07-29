@@ -32,6 +32,10 @@ const categories = [
   "Accessibilité"
 ];
 
+type Post = {
+  id: number;
+};
+
 export default async function BlogPage() {
   // Récupération des données côté serveur
   const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
@@ -42,13 +46,13 @@ export default async function BlogPage() {
     throw new Error("Failed to fetch posts");
   }
 
-  const allPosts = await res.json();
+  const allPosts = (await res.json()) as Post[];
   const posts = allPosts.slice(0, 12);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {posts.map((post: any, index: number) => (
+        {posts.map((post, index) => (
           <article 
             key={post.id} 
             className="bg-white rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 border border-gray-100 flex flex-col h-full overflow-hidden group"
@@ -79,7 +83,7 @@ export default async function BlogPage() {
                 href={`/blog/${post.id}`} 
                 className="inline-flex items-center text-white bg-primary px-5 py-2.5 rounded-xl font-semibold hover:shadow-lg transition duration-300 w-fit"
               >
-                Lire l'article
+                Lire l&apos;article
                 <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
