@@ -7,6 +7,8 @@ import { useState } from "react";
 const links = [
   { href: "/", label: "Accueil" },
   { href: "/about", label: "À propos" },
+  { href: "/projects", label: "Projets" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -39,7 +41,7 @@ const Navbar = () => {
         type="button"
         className="inline-flex items-center justify-center rounded-xl border border-slate-300 p-2 text-slate-700 transition duration-300 hover:bg-slate-100 md:hidden"
         aria-expanded={isOpen}
-        aria-label="Ouvrir le menu"
+        aria-label="Ouvrir le menu de navigation"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <span className="text-lg">{isOpen ? "✕" : "☰"}</span>

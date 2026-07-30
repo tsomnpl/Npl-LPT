@@ -1,7 +1,7 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 
-// Mêmes thèmes pour la correspondance d'ID
 const themes = [
   "L'avenir de l'Intelligence Artificielle en 2026",
   "Les meilleures pratiques en Développement Web",
@@ -14,7 +14,7 @@ const themes = [
   "SEO : Les secrets pour bien se positionner",
   "L'Innovation technologique au service de l'entreprise",
   "Construire des architectures scalables",
-  "L'importance de l'accessibilité web"
+  "L'importance de l'accessibilité web",
 ];
 
 const categories = [
@@ -29,22 +29,66 @@ const categories = [
   "SEO",
   "Innovation",
   "Architecture",
-  "Accessibilité"
+  "Accessibilité",
 ];
 
-export default async function BlogPost({ params }: { params: Promise<{ id: string }> }) {
-  // En Next.js 15, params est souvent une promesse, il est donc recommandé de l'attendre
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
   const { id } = await params;
-  
+  const index = (parseInt(id) - 1) % 12;
+  const theme = themes[index] || "Article Tech";
+  const category = categories[index] || "Technologie";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://npl-lpt.vercel.app";
+
+  return {
+    title: `${theme} | Blog Future-Tech`,
+    description: `Lisez notre article complet sur "${theme}". Retrouvez nos analyses, stratégies et conseils d'experts en ${category}.`,
+    keywords: [theme, category, "Future-Tech", "Blog Tech", "Développement Web"],
+    authors: [{ name: "Isaac TCHIWANOU", url: siteUrl }],
+    robots: { index: true, follow: true },
+    openGraph: {
+      title: `${theme} | Blog Future-Tech`,
+      description: `Lisez notre article complet sur "${theme}". Retrouvez nos analyses, stratégies et conseils d'experts en ${category}.`,
+      url: `${siteUrl}/blog/${id}`,
+      siteName: "Future-Tech",
+      locale: "fr_FR",
+      type: "article",
+      images: [
+        {
+          url: `https://picsum.photos/seed/futuretech${id}/1200/600`,
+          width: 1200,
+          height: 600,
+          alt: theme,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${theme} | Blog Future-Tech`,
+      description: `Lisez notre article complet sur "${theme}". Retrouvez nos analyses, stratégies et conseils d'experts en ${category}.`,
+      images: [`https://picsum.photos/seed/futuretech${id}/1200/600`],
+    },
+    alternates: {
+      canonical: `${siteUrl}/blog/${id}`,
+    },
+  };
+}
+
+export default async function BlogPost({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-    next: { revalidate: 3600 }
+    next: { revalidate: 3600 },
   });
 
   if (!res.ok) {
     throw new Error("Article introuvable");
   }
 
-  const post = await res.json();
+  const post = (await res.json()) as { id: number; title: string; body: string };
   const index = (parseInt(id) - 1) % 12;
   const theme = themes[index] || "Sujet Tech du moment";
   const category = categories[index] || "Actualité";
@@ -52,8 +96,8 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
   return (
     <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-10 text-center">
-        <Link 
-          href="/blog" 
+        <Link
+          href="/blog"
           className="inline-flex items-center text-primary-dark hover:text-primary transition font-semibold mb-8"
         >
           <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -77,9 +121,9 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
       </div>
 
       <div className="relative w-full aspect-video rounded-3xl overflow-hidden mb-12 shadow-lg">
-        <Image 
+        <Image
           src={`https://picsum.photos/seed/futuretech${post.id}/1200/600`}
-          alt={theme}
+          alt={`Illustration principale de l'article : ${theme}`}
           fill
           priority
           sizes="(max-width: 1200px) 100vw, 1200px"
@@ -93,7 +137,7 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
             Dans le monde en constante évolution de la technologie, il est primordial de rester à la pointe des nouvelles pratiques. 
             Découvrez nos analyses, conseils et retours d&apos;expérience sur ce sujet essentiel pour votre activité.
           </p>
-          
+
           <h2 className="text-2xl font-bold text-primary mb-4 mt-8">Introduction</h2>
           <p className="mb-6">
             L&apos;écosystème numérique change chaque jour. L&apos;impact de ces nouvelles technologies sur notre façon de développer
@@ -114,10 +158,10 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
             L&apos;adoption de nouveaux paradigmes de développement nous permet aujourd&apos;hui d&apos;atteindre des niveaux
             de performance et de fiabilité jamais vus auparavant.
           </p>
-          
+
           <h2 className="text-2xl font-bold text-primary mb-4 mt-8">Conclusion</h2>
           <p>
-            En résumé, aborder cette thématique demande du temps, mais l'investissement en vaut largement la peine.
+            En résumé, aborder cette thématique demande du temps, mais l&apos;investissement en vaut largement la peine.
             Chez Future-Tech, nous mettons un point d&apos;honneur à implémenter ces concepts dans chacun de nos projets,
             afin de toujours garantir des solutions numériques modernes, scalables et durables.
           </p>
