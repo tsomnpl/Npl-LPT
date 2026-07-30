@@ -51,15 +51,26 @@ export const metadata: Metadata = {
     title: `${siteName} | Développement Web & Solutions Numériques`,
     description:
       "Future-Tech accompagne entreprises et entrepreneurs dans la création de sites web modernes, applications performantes et solutions digitales innovantes.",
+    images: [
+      {
+        url: "/images.jpg",
+        width: 800,
+        height: 600,
+        alt: "Future-Tech Logo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteName} | Développement Web & Solutions Numériques`,
     description:
       "Future-Tech accompagne entreprises et entrepreneurs dans la création de sites web modernes, applications performantes et solutions digitales innovantes.",
+    images: ["/images.jpg"],
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/images.jpg",
+    shortcut: "/images.jpg",
+    apple: "/images.jpg",
   },
 };
 

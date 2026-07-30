@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
@@ -21,8 +22,16 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="text-2xl font-extrabold text-primary tracking-tight">
-              Future-Tech
+            <Link href="/" className="flex items-center gap-3 text-2xl font-extrabold text-primary tracking-tight">
+              <Image
+                src="/images.jpg"
+                alt="Future-Tech Logo"
+                width={40}
+                height={40}
+                priority
+                className="rounded-xl object-cover shadow-sm border border-blue-100"
+              />
+              <span>Future-Tech</span>
             </Link>
           </div>
 

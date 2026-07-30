@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "isaactchiwanou@gmail.com";
 
@@ -8,7 +9,16 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <span className="text-2xl font-bold text-primary">Future-Tech</span>
+            <Link href="/" className="flex items-center gap-3">
+              <Image
+                src="/images.jpg"
+                alt="Future-Tech Logo"
+                width={36}
+                height={36}
+                className="rounded-xl object-cover shadow-sm border border-blue-100"
+              />
+              <span className="text-2xl font-extrabold text-primary">Future-Tech</span>
+            </Link>
             <p className="mt-4 text-primary-dark max-w-sm leading-relaxed">
               Créons ensemble des solutions numériques modernes, performantes et épurées.
             </p>
