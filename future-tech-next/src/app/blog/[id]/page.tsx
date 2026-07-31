@@ -124,8 +124,8 @@ export default async function BlogPost({ params }: { params: Promise<{ id: strin
         <Image
           src={`https://picsum.photos/seed/futuretech${post.id}/1200/600`}
           alt={`Illustration principale de l'article : ${theme}`}
-          fill
-          priority
+          width={1200}
+          height={600}
           sizes="(max-width: 1200px) 100vw, 1200px"
           className="object-cover"
         />

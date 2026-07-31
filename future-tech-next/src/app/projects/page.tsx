@@ -95,7 +95,8 @@ export default function ProjectsPage() {
               <Image
                 src={`https://picsum.photos/seed/${project.imageSeed}/800/500`}
                 alt={`Aperçu du projet ${project.title}`}
-                fill
+                width={800}
+                height={500}
                 loading="lazy"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover group-hover:scale-105 transition duration-500"

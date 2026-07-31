@@ -107,7 +107,8 @@ export default async function BlogPage() {
               <Image
                 src={`https://picsum.photos/seed/futuretech${post.id}/600/400`}
                 alt={`Illustration de l'article : ${themes[index]}`}
-                fill
+                width={600}
+                height={400}
                 loading="lazy"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover group-hover:scale-105 transition duration-500"
